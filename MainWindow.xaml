@@ -7,18 +7,27 @@
         mc:Ignorable="d"
         Title="LangTestChecker" WindowStyle="ToolWindow" d:DesignWidth="744" Height="536" Width="745">
     <Grid>
-        <Button x:Name="browseMessageFile" Content="Open" HorizontalAlignment="Left" Margin="125,38,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browseMessageFile_Click"/>
-        <Button x:Name="browseLanguageFile" Content="Open" HorizontalAlignment="Left" Margin="125,66,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browseLanguageFile_Click"/>
+        <Button x:Name="browseMessageFile" Content="Open" HorizontalAlignment="Left" Margin="122,143,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browseMessageFile_Click"/>
+        <Button x:Name="browseLanguageFile" Content="Open" HorizontalAlignment="Left" Margin="122,171,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browseLanguageFile_Click"/>
         <Button x:Name="compare" Content="Run" HorizontalAlignment="Left" Margin="29,198,0,0" VerticalAlignment="Top" Width="75" Click="compare_Click"/>
-        <TextBlock x:Name="Messages" HorizontalAlignment="Left" Margin="32,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Message File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="Messages_Copy" HorizontalAlignment="Left" Margin="32,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Language File"/><LineBreak/><Run/></TextBlock>
-        <TextBox x:Name="resultText" HorizontalAlignment="Left" Height="266" Margin="29,223,0,0" TextWrapping="Wrap" Text="Result text..." VerticalAlignment="Top" Width="695" VerticalScrollBarVisibility="Auto"/>
+        <TextBlock x:Name="Messages" HorizontalAlignment="Left" Margin="29,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Message File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="Messages_Copy" HorizontalAlignment="Left" Margin="29,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Language File"/><LineBreak/><Run/></TextBlock>
+        <TextBox x:Name="resultText" Margin="10,223,10,10" TextWrapping="Wrap" Text="Result text..." VerticalScrollBarVisibility="Auto"/>
         <TextBlock x:Name="textCounter" HorizontalAlignment="Right" Margin="0,198,68,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="49" TextAlignment="Right"/>
-        <TextBlock x:Name="MessageFileName" HorizontalAlignment="Left" Margin="220,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="LanguageFileName" HorizontalAlignment="Left" Margin="220,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
-        <Button x:Name="browsePermissiveFile" Content="Open" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browsePermissiveFile_Click"/>
-        <TextBlock x:Name="Permissive" HorizontalAlignment="Left" Margin="32,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Permissive File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="PermissiveFileName" HorizontalAlignment="Left" Margin="220,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
-
+        <TextBlock x:Name="MessageFileName" HorizontalAlignment="Left" Margin="217,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="LanguageFileName" HorizontalAlignment="Left" Margin="217,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
+        <Button x:Name="browsePermissiveFile" Content="Open" HorizontalAlignment="Left" Margin="122,115,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browsePermissiveFile_Click"/>
+        <TextBlock x:Name="Permissive" HorizontalAlignment="Left" Margin="29,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Permissive File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="PermissiveFileName" HorizontalAlignment="Left" Margin="217,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23" Cursor="None"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="73">
+            <MenuItem Header="File">
+                <MenuItem Header="Open Config" ></MenuItem>
+                <MenuItem Header="Save Config" ></MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help" ></MenuItem>
+        </Menu>
+        <Button x:Name="comparePermissives" Content="Run" HorizontalAlignment="Left" Margin="122,198,0,0" VerticalAlignment="Top" Width="75" Click="comparePermissives_Click"/>
     </Grid>
 </Window>

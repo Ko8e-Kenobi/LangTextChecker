@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.IO;
-
+using System.Windows.Input;
 
 namespace LangTextChecker
 {
@@ -55,9 +55,9 @@ namespace LangTextChecker
 
         private void compare_Click(object sender, RoutedEventArgs e)
         {
-            resultText.Text = Compare();
+            resultText.Text = CompareMessages();
         }
-        private string Compare() {
+        private string CompareMessages() {
             FileStream messagesFs = new FileStream(MessageFileName.Text, FileMode.Open, FileAccess.Read); //открывает файл только на чтение
             StreamReader messages = new StreamReader(messagesFs); // создаем «потоковый читатель» и связываем его с файловым потоком
 
@@ -96,9 +96,55 @@ namespace LangTextChecker
             return text;
         }
 
+        private string ComparePermissives()
+        {
+            FileStream permissivesFs = new FileStream(PermissiveFileName.Text, FileMode.Open, FileAccess.Read); //открывает файл только на чтение
+            StreamReader permissives = new StreamReader(permissivesFs); // создаем «потоковый читатель» и связываем его с файловым потоком
+
+            FileStream languageFs = new FileStream(LanguageFileName.Text, FileMode.Open, FileAccess.Read); //открывает файл только на чтение
+            StreamReader language = new StreamReader(languageFs); // создаем «потоковый читатель» и связываем его с файловым потоком
+            string lineText = "", languageText = language.ReadToEnd(), text = "";
+            int charId = 0, textCounterFun = 0;
+            Mouse.OverrideCursor = Cursors.Wait;
+
+            while (!permissives.EndOfStream)
+            {
+
+                lineText = permissives.ReadLine();
+                if (!lineText.StartsWith("Intk00") && (lineText.StartsWith("Intk")||lineText.StartsWith("Panel")))
+                {
+                    charId = lineText.IndexOf("=");
+                    if (charId >= 0)
+                    {
+                        lineText = lineText.Remove(0, charId + 1).Trim();
+                        if (!languageText.Contains(lineText) && !text.Contains(lineText))
+                        {
+                            textCounterFun++;
+                            text = text.Insert(0, $"{lineText}\r\n");
+                        }
+                        
+                    }
+                }
+                
+            }
+            textCounter.Text = textCounterFun.ToString();
+            permissives.Close();
+            permissivesFs.Close();
+            language.Close();
+            languageFs.Close();
+            MessageBox.Show($"Found {textCounterFun.ToString()} missed texts.");
+            Mouse.OverrideCursor = Cursors.Arrow;
+            return text;
+        }
+
         private void browsePermissiveFile_Click(object sender, RoutedEventArgs e)
         {
             PermissiveFileName.Text = FileDialog("ini");
+        }
+
+        private void comparePermissives_Click(object sender, RoutedEventArgs e)
+        {
+            resultText.Text = ComparePermissives();
         }
     }
 }

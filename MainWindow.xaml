@@ -6,30 +6,7 @@
         xmlns:local="clr-namespace:LangTextChecker"
         mc:Ignorable="d"
         Title="LangTestChecker" WindowStyle="ToolWindow" d:DesignWidth="744" Height="536" Width="745">
-    <Grid>
-        <Button x:Name="browseMessageFile" Content="Open" HorizontalAlignment="Left" Margin="122,56,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browseMessageFile_Click"/>
-        <Button x:Name="browseLanguageFile" Content="Open" HorizontalAlignment="Left" Margin="122,84,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browseLanguageFile_Click"/>
-        <Button x:Name="compare" Content="Show Messages" HorizontalAlignment="Left" Margin="29,111,0,0" VerticalAlignment="Top" Width="112" Click="compare_Click"/>
-        <TextBlock x:Name="Messages" HorizontalAlignment="Left" Margin="29,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Message File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="Messages_Copy" HorizontalAlignment="Left" Margin="29,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Language File"/><LineBreak/><Run/></TextBlock>
-        <TextBox x:Name="resultText" Margin="10,181,10,52" TextWrapping="Wrap" Text="Result text..." VerticalScrollBarVisibility="Auto"/>
-        <TextBlock x:Name="textCounter" HorizontalAlignment="Right" Margin="0,111,68,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="49" TextAlignment="Right"/>
-        <TextBlock x:Name="MessageFileName" HorizontalAlignment="Left" Margin="217,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="LanguageFileName" HorizontalAlignment="Left" Margin="217,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
-        <Button x:Name="browsePermissiveFile" Content="Open" HorizontalAlignment="Left" Margin="122,28,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="browsePermissiveFile_Click"/>
-        <TextBlock x:Name="Permissive" HorizontalAlignment="Left" Margin="29,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Permissive File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="PermissiveFileName" HorizontalAlignment="Left" Margin="217,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="23" Cursor="None"><Run Text="File path..."/><LineBreak/><Run/></TextBlock>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="73">
-            <MenuItem Header="File">
-                <MenuItem Header="Open Config" ></MenuItem>
-                <MenuItem Header="Save Config" ></MenuItem>
-                <Separator />
-                <MenuItem Header="Exit" ></MenuItem>
-            </MenuItem>
-            <MenuItem Header="Help" ></MenuItem>
-        </Menu>
-        <Button x:Name="comparePermissives" Content="Show Permissives" HorizontalAlignment="Left" Margin="29,136,0,0" VerticalAlignment="Top" Width="112" Click="comparePermissives_Click"/>
-        <Button x:Name="SplitToOPIntk" Content="OP Files" HorizontalAlignment="Left" Margin="161,116,0,0" VerticalAlignment="Top" Width="75" Click="SplitToOPIntk_Click"/>
-        <TextBox x:Name="StatusTextBox" HorizontalAlignment="Left" Height="23" Margin="10,459,0,0" Text ="Open files and RUN command..." TextWrapping="Wrap" VerticalAlignment="Top" Width="714" />
-    </Grid>
+  
+  <Viewbox Margin="10" />
+
 </Window>

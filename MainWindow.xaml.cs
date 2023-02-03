@@ -15,10 +15,11 @@ namespace LangTextChecker
         
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             View.CheckerView checkerView = new View.CheckerView();
             checkerView.Show();
             Close();
+
         }
     }
 }

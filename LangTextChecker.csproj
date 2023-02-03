@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands.cs" />
+    <Compile Include="CommonHandler.cs" />
     <Compile Include="Views\CheckerView.xaml.cs">
       <DependentUpon>CheckerView.xaml</DependentUpon>
     </Compile>
@@ -103,6 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Danieli_Logo.png" />
+    <Content Include="Views\logo_danieli.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

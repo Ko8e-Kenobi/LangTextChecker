@@ -8,40 +8,153 @@ using LangTextChecker.Models;
 using System.IO;
 using System.Windows.Input;
 using System.Windows;
+using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
+using System.Windows;
 namespace LangTextChecker.ViewModels
 {
     public class CheckerViewModel : INotifyPropertyChanged
     {
-        private CheckerModel myCheckerModel;
-
-        public CheckerViewModel() 
-        {
-            myCheckerModel = new CheckerModel()
-            {
-                MessageFileName = "Choose \"message.ini\" file"
-            };
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void OnPropertyChanged(string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        private CheckerModel myCheckerModel;
+        public CheckerViewModel()
+        {
+            myCheckerModel = new CheckerModel()
+            {
+                MessageFileName = "Choose \"message.ini\" file",
+                PermissiveFileName = "Choose \"permissive.ini\" file",
+                LanguageFileName = "Choose \"lang****.txt\" file"
+            };
+        }
 
+        #region Public Binding Properties
         public string MessageFileName
         {
             get
             {
                 return myCheckerModel.MessageFileName;
             }
-            set 
+            set
             {
                 myCheckerModel.MessageFileName = value;
                 OnPropertyChanged("MessageFileName");
             }
         }
+
+        public string PermissiveFileName
+        {
+            get
+            {
+                return myCheckerModel.PermissiveFileName;
+            }
+            set
+            {
+                myCheckerModel.PermissiveFileName = value;
+                OnPropertyChanged("PermissiveFileName");
+            }
+        }
+
+        public string LanguageFileName
+        {
+            get
+            {
+                return myCheckerModel.LanguageFileName;
+            }
+            set
+            {
+                myCheckerModel.LanguageFileName = value;
+                OnPropertyChanged("LanguageFileName");
+            }
+        }
+        public string ResultText
+        {
+            get
+            {
+                return myCheckerModel.ResultText;
+            }
+            set
+            {
+                myCheckerModel.ResultText = value;
+                OnPropertyChanged("ResultText");
+            }
+        }
+        #endregion
+
+        #region OpenMessageFile Simple implementation of ICommand
+
+        private ICommand openMessageFile;
+        public ICommand OpenMessageFile
+        {
+            get
+            {
+                if (openMessageFile == null)
+                    openMessageFile = new Commands.VoidCommand(_OpenMessageFile) { };
+                return openMessageFile;
+            }
+            set
+            {
+                openMessageFile = value;
+            }
+        }
+
+        private void _OpenPermissiveFile()
+        {
+            PermissiveFileName = CommonHandler.FileDialog("ini");
+        }
+
+        #endregion
+
+        #region OpenPermissivesFile Simple implementation of ICommand
+        private ICommand openPermissiveFile;
+        public ICommand OpenPermissiveFile
+        {
+            get
+            {
+                if (openPermissiveFile == null)
+                    openPermissiveFile = new Commands.VoidCommand(_OpenPermissiveFile) { };
+                return openPermissiveFile;
+            }
+            set
+            {
+                openPermissiveFile = value;
+            }
+        }
+        private void _OpenMessageFile()
+        {
+            MessageFileName = CommonHandler.FileDialog("ini");
+        }
+
+        #endregion
+
+        #region OpenLanguageFile Simple implementation of ICommand
+        private ICommand openLanguageFile;
+        public ICommand OpenLanguageFile
+        {
+            get
+            {
+                if (openLanguageFile == null)
+                    openLanguageFile = new Commands.VoidCommand(_OpenLanguageFile) { };
+                return openLanguageFile;
+            }
+            set
+            {
+                openLanguageFile = value;
+            }
+        }
+
+        private void _OpenLanguageFile()
+        {
+            LanguageFileName = CommonHandler.FileDialog("txt");
+        }
+
+        #endregion
+
+
 
         private delegate string CompareFunction(StreamReader operationSr, string languageText, out string counter);
 
@@ -195,5 +308,28 @@ namespace LangTextChecker.ViewModels
             permissives.Close();
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        #region Complicated Implementation of ICommand. !!!! To test and implement later !!!!
+
+        private bool canBrowseMessageFileComplicated;
+        private ICommand openMessageFileCmdComplicated;
+        public ICommand OpenMessageFileCmdComplicated
+        {
+            get
+            {
+                if (openMessageFileCmdComplicated == null) openMessageFileCmdComplicated = new Commands.CompicatedCommand(o => canBrowseMessageFileComplicated, o => BrowseMessageFile());
+                return openMessageFileCmdComplicated;
+            }
+            set
+            {
+                openMessageFileCmdComplicated = value;
+            }
+        }
+        private void BrowseMessageFile()
+        {
+            MessageBox.Show("Test");
+        }
+        #endregion
+
     }
 }

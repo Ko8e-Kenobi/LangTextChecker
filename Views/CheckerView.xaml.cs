@@ -29,59 +29,11 @@ namespace LangTextChecker.View
             DataContext = new CheckerViewModel();
         }
 
-        private void browseMessageFile_Click(object sender, RoutedEventArgs e)
-        {
-            //MessageFileName.Text = FileDialog("ini");
-            FileDialog("ini");
-        }
-
-        private string FileDialog(string extension)
-        {
-            // Create OpenFileDialog 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
-
-            // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".txt";
-            dlg.Filter = $"{extension.ToUpper()} Files (*.{extension})|*.{extension}";
-
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
-
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
-            {
-                // Open document 
-                string filename = dlg.FileName;
-                return filename;
-            }
-            else
-            {
-                return "File not found";
-            }
-
-        }
-
-        private void browseLanguageFile_Click(object sender, RoutedEventArgs e)
-        {
-            LanguageFileName.Text = FileDialog("txt");
-        }
-
-
         private void compareMessages_Click(object sender, RoutedEventArgs e)
         {
             StatusTextBox.Text = PROCESSING;
             resultText.Text = MyChecker.CompareMessages(MessageFileName.Text, LanguageFileName.Text, out string counter);
             textCounter.Text = counter;
-            StatusTextBox.Text = READY;
-        }
-
-        private void browsePermissiveFile_Click(object sender, RoutedEventArgs e)
-        {
-            StatusTextBox.Text = PROCESSING;
-            PermissiveFileName.Text = FileDialog("ini");
             StatusTextBox.Text = READY;
         }
 

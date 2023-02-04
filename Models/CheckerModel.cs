@@ -8,6 +8,9 @@ namespace LangTextChecker.Models
 {
     public class CheckerModel : INotifyPropertyChanged
     {
+        public string PROCESSING { get => "Wait while processing..."; }
+        public string READY { get => "Ready..."; }
+
         private string status;
 
         private string counter;
@@ -19,7 +22,7 @@ namespace LangTextChecker.Models
         private string permissiveFileName;
 
         private string languageFileName;
-        
+
         public string MessageFileName { get => messageFileName; set => messageFileName = value; } 
 
         public string PermissiveFileName { get => permissiveFileName; set => permissiveFileName = value; }

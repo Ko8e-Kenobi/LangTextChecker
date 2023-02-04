@@ -41,16 +41,18 @@ namespace LangTextChecker
 
         public class VoidCommand : ICommand
         {
-            private SomeVoidMethod ExecuteMethod;
-            public VoidCommand(SomeVoidMethod ToExecute)
+            SomeVoidMethod ExecuteMethod;
+            bool canExecute;
+            public VoidCommand(SomeVoidMethod ToExecute, bool canExecute)
             {
                 ExecuteMethod = ToExecute;
+                this.canExecute = canExecute;
             }
             #region ICommand Members  
 
             public bool CanExecute(object parameter)
             {
-                return true;
+                return canExecute;
             }
 
             public event EventHandler CanExecuteChanged

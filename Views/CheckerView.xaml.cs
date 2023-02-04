@@ -20,36 +20,10 @@ namespace LangTextChecker.View
     /// </summary>
     public partial class CheckerView : Window
     {
-        private const string PROCESSING = "Wait while processing...", READY = "Ready...";
-        Checker MyChecker = new Checker();
-
         public CheckerView()
         {
             InitializeComponent();
             DataContext = new CheckerViewModel();
-        }
-
-        private void compareMessages_Click(object sender, RoutedEventArgs e)
-        {
-            StatusTextBox.Text = PROCESSING;
-            resultText.Text = MyChecker.CompareMessages(MessageFileName.Text, LanguageFileName.Text, out string counter);
-            textCounter.Text = counter;
-            StatusTextBox.Text = READY;
-        }
-
-        private void comparePermissives_Click(object sender, RoutedEventArgs e)
-        {
-            StatusTextBox.Text = PROCESSING;
-            resultText.Text = MyChecker.ComparePermissives(PermissiveFileName.Text, LanguageFileName.Text, out string counter);
-            textCounter.Text = counter;
-            StatusTextBox.Text = READY;
-        }
-
-        private void SplitToOPIntk_Click(object sender, RoutedEventArgs e)
-        {
-            StatusTextBox.Text = PROCESSING;
-            MyChecker.GenerateOPPermissivesFilesFromHMI(PermissiveFileName.Text, LanguageFileName.Text);
-            StatusTextBox.Text = READY;
         }
     }
 }

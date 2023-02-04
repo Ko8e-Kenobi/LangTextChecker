@@ -27,7 +27,8 @@ namespace LangTextChecker.ViewModels
                 MessageFileName = "Choose \"message.ini\" file",
                 PermissiveFileName = "Choose \"permissive.ini\" file",
                 LanguageFileName = "Choose \"lang****.txt\" file",
-                Status = "To start: Open language file and at least one of \"permissives.ini\" or \"messages.ini\" file."
+                Status = "To start: Open language file and at least one of \"permissives.ini\" or \"messages.ini\" file.",
+                Counter = "..."
             };
         }
 
@@ -127,10 +128,9 @@ namespace LangTextChecker.ViewModels
                 openMessageFile = value;
             }
         }
-
-        private void _OpenPermissiveFile()
+        private void _OpenMessageFile()
         {
-            PermissiveFileName = CommonHandler.FileDialog("ini");
+            MessageFileName = CommonHandler.FileDialog("ini");
         }
 
         #endregion
@@ -150,9 +150,10 @@ namespace LangTextChecker.ViewModels
                 openPermissiveFile = value;
             }
         }
-        private void _OpenMessageFile()
+
+        private void _OpenPermissiveFile()
         {
-            MessageFileName = CommonHandler.FileDialog("ini");
+            PermissiveFileName = CommonHandler.FileDialog("ini");
         }
 
         #endregion
@@ -222,7 +223,7 @@ namespace LangTextChecker.ViewModels
 
         private void _ComparePermissives()
         {
-            Task TComparePermissives = new Task(() => ResultText = Compare(PermissiveFileName, ComparePermissivesOperation));
+            Task TComparePermissives = new Task(() => Compare(PermissiveFileName, ComparePermissivesOperation));
             TComparePermissives.Start();
         }
 
@@ -235,7 +236,7 @@ namespace LangTextChecker.ViewModels
             get
             {
                 if (generateOPPermissive == null)
-                    generateOPPermissive = new Commands.VoidCommand(_GenerateOPPermissive,false) { };
+                    generateOPPermissive = new Commands.VoidCommand(_GenerateOPPermissive, true) { };
                 return generateOPPermissive;
             }
             set
@@ -248,6 +249,29 @@ namespace LangTextChecker.ViewModels
         {
             Task TGenerateOPPermissive = new Task(() => GenerateOPPermissivesFilesFromHMI());
             TGenerateOPPermissive.Start();
+        }
+
+        #endregion
+
+        #region OpenMessageFile Simple implementation of ICommand
+
+        private ICommand exit;
+        public ICommand Exit
+        {
+            get
+            {
+                if (exit == null)
+                    exit = new Commands.VoidCommand(CloseChecker, true) { };
+                return exit;
+            }
+            set
+            {
+                exit = value;
+            }
+        }
+        private void CloseChecker()
+        {
+            Application.Current.Shutdown();
         }
 
         #endregion
@@ -297,6 +321,9 @@ namespace LangTextChecker.ViewModels
                         {
                             textCounterFun++;
                             text = text.Insert(0, $"{lineText}\r\n");
+                            ResultText = text;
+                            FoundCounter = textCounterFun.ToString();
+                            Status = $"Found text: {lineText}";
                         }
                     }
                 }
@@ -323,12 +350,14 @@ namespace LangTextChecker.ViewModels
                         {
                             textCounterFun++;
                             text = text.Insert(0, $"{lineText}\r\n");
+                            ResultText = text;
+                            FoundCounter = textCounterFun.ToString();
                             Status = $"Found text: {lineText}";
                         }
                     }
                 }
             }
-            FoundCounter = textCounterFun.ToString();
+            
             return text;
         }
 
@@ -336,17 +365,22 @@ namespace LangTextChecker.ViewModels
         {
             FileStream permissivesFs = new FileStream(PermissiveFileName, FileMode.Open, FileAccess.Read); //открывает файл только на чтение
             StreamReader permissives = new StreamReader(permissivesFs); // создаем «потоковый читатель» и связываем его с файловым потоком
-
+            int movedTextsCounter = 0, createdFilesCounter = 0;
+            string fileList="";
             while (!permissives.EndOfStream)
             {
                 string lineText = permissives.ReadLine();
                 if (lineText.StartsWith("[") && !lineText.Contains("[0ST_IntkPerm_Empty]"))
                 {
                     string tagName = lineText.Substring(1, lineText.Length - 2);
+                    Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\OPfiles");
                     FileStream permissiveOPfs = File.Create($@"{Directory.GetCurrentDirectory()}\OPfiles\{tagName}.intk");
                     StreamWriter permissivesOPWr = new StreamWriter(permissiveOPfs, Encoding.Unicode);
                     Status = $"New permissive file created: {tagName}";
+                    fileList = fileList.Insert(0, $"[{tagName}]\r\n");
+                    ResultText = fileList;
                     permissivesOPWr.WriteLine($"{lineText}");
+                    createdFilesCounter++;
                     do
                     {
                         lineText = permissives.ReadLine();
@@ -369,6 +403,7 @@ namespace LangTextChecker.ViewModels
                                         charId = languageText.IndexOf("=");
                                         string translatedText = languageText.Remove(0, charId + 1).Trim();
                                         lineText = $"{headerText}{translatedText}";
+                                        FoundCounter = movedTextsCounter++.ToString();
                                         break;
                                     }
                                 }
@@ -387,6 +422,7 @@ namespace LangTextChecker.ViewModels
             permissivesFs.Close();
             permissives.Close();
             Status = myCheckerModel.READY;
+            MessageBox.Show($"{createdFilesCounter} files have been created, {movedTextsCounter} texts have been moved.");
         }
 
         #region Complicated Implementation of ICommand. !!!! To test and implement later !!!!

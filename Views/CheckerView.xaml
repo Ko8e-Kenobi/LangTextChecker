@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LangTextChecker.View"
         mc:Ignorable="d"
-        Title="CheckerView" Height="450" Width="800">
+        Title="CheckerView" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="123*"/>
@@ -15,26 +15,27 @@
         <TextBlock x:Name="Messages" HorizontalAlignment="Left" Margin="11,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Message File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
         <TextBlock x:Name="Messages_Copy" HorizontalAlignment="Left" Margin="11,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Language File"/><LineBreak/><Run/></TextBlock>
         <TextBox x:Name="resultText" Text="{Binding ResultText, UpdateSourceTrigger=PropertyChanged}" Margin="10,155,10,38.5" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="textCounter" Text ="{Binding FoundCounter, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,157,9,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" TextAlignment="Right" Grid.Column="1"/>
+        <TextBlock x:Name="textCounter" Text ="{Binding FoundCounter, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,127,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" Grid.Column="1" Height="23"/>
         <Button x:Name="browseMessageFile" Content="Open" Command="{Binding OpenMessageFile}" HorizontalAlignment="Left" Margin="104,74,0,0" VerticalAlignment="Top" Width="75" Height="23" />
-        <TextBlock x:Name="MessageFileName" Text ="{Binding MessageFileName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="184,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="601" Height="23" Grid.ColumnSpan="2"><Run/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="MessageFileName" Text ="{Binding MessageFileName, UpdateSourceTrigger=PropertyChanged}" Margin="184,74,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2"><Run/><LineBreak/><Run/></TextBlock>
         <Button x:Name="browseLanguageFile" Content="Open" Command="{Binding OpenLanguageFile}" HorizontalAlignment="Left" Margin="104,102,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <TextBlock x:Name="LanguageFileName" Text="{Binding LanguageFileName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="184,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="601" Height="23" Grid.ColumnSpan="2"><Run /><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="LanguageFileName" Text="{Binding LanguageFileName, UpdateSourceTrigger=PropertyChanged}" Margin="184,102,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2"><Run /><LineBreak/><Run/></TextBlock>
         <TextBlock x:Name="Permissive" HorizontalAlignment="Left" Margin="11,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" Height="23"><Run Text="Permissive File"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
         <Button x:Name="browsePermissiveFile" Content="Open" Command="{Binding OpenPermissiveFile}" HorizontalAlignment="Left" Margin="104,46,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <TextBlock x:Name="PermissiveFileName" Text="{Binding PermissiveFileName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="184,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="601" Height="23" Cursor="None" Grid.ColumnSpan="2"><Run/><LineBreak/><Run/></TextBlock>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="73">
+        <TextBlock x:Name="PermissiveFileName" Text="{Binding PermissiveFileName, UpdateSourceTrigger=PropertyChanged}" Margin="184,46,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Cursor="None" Grid.ColumnSpan="2"><Run/><LineBreak/><Run/></TextBlock>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="99">
             <MenuItem Header="File">
                 <MenuItem Header="Open Config" ></MenuItem>
                 <MenuItem Header="Save Config" ></MenuItem>
                 <Separator />
-                <MenuItem Header="Exit" ></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding Exit}" ></MenuItem>
             </MenuItem>
-            <MenuItem Header="Help" ></MenuItem>
+            <MenuItem Header="About" ></MenuItem>
         </Menu>
         <Button x:Name="comparePermissives" Content="Show Permissives" Command="{Binding ComparePermissives}" HorizontalAlignment="Left" Margin="127,130,0,0" VerticalAlignment="Top" Width="112"/>
         <Button x:Name="SplitToOPIntk" Command="{Binding GenerateOPPermissive}" Content="OP Files" HorizontalAlignment="Left" Margin="244,130,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="StatusTextBox" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" Height="28" Margin="10,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="775" Background="White" Grid.ColumnSpan="2"/>
-        <Image x:Name="Danieli_Logo" HorizontalAlignment="Left" Height="31" Margin="181.85,10,0,0" VerticalAlignment="Top" Width="234" Source="Danieli_Logo.png" Grid.Column="1"/>
+        <TextBox x:Name="StatusTextBox" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Height="23" Margin="10,0,10,10.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="White" Grid.ColumnSpan="2"/>
+        <Image x:Name="Danieli_Logo" Height="31" Margin="182,10,10,0" VerticalAlignment="Top" Source="Danieli_Logo.png" Grid.Column="1" HorizontalAlignment="Right"/>
+        <TextBlock x:Name="foundTexts" Grid.Column="1" HorizontalAlignment="Right" Margin="0,127,64,0" TextWrapping="Wrap" Text="Found texts" VerticalAlignment="Top" Height="23" Width="67" TextAlignment="Right"/>
     </Grid>
 </Window>

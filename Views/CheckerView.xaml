@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LangTextChecker.View"
         mc:Ignorable="d"
-        Title="CheckerView" Height="450" Width="800" MinHeight="450" MinWidth="800">
+        Title="Language Text Checker" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="123*"/>
@@ -30,7 +30,7 @@
                 <Separator />
                 <MenuItem Header="Exit" Command="{Binding Exit}" ></MenuItem>
             </MenuItem>
-            <MenuItem Header="About" ></MenuItem>
+            <MenuItem Header="About" Command="{Binding About}"></MenuItem>
         </Menu>
         <Button x:Name="comparePermissives" Content="Show Permissives" Command="{Binding ComparePermissives}" HorizontalAlignment="Left" Margin="127,130,0,0" VerticalAlignment="Top" Width="112"/>
         <Button x:Name="SplitToOPIntk" Command="{Binding GenerateOPPermissive}" Content="OP Files" HorizontalAlignment="Left" Margin="244,130,0,0" VerticalAlignment="Top" Width="75"/>

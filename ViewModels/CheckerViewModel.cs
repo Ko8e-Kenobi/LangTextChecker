@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using LangTextChecker.Models;
@@ -253,7 +250,7 @@ namespace LangTextChecker.ViewModels
 
         #endregion
 
-        #region OpenMessageFile Simple implementation of ICommand
+        #region Exit Simple implementation of ICommand
 
         private ICommand exit;
         public ICommand Exit
@@ -272,6 +269,32 @@ namespace LangTextChecker.ViewModels
         private void CloseChecker()
         {
             Application.Current.Shutdown();
+        }
+
+        #endregion
+
+        #region About Simple implementation of ICommand
+
+        private ICommand about;
+        public ICommand About
+        {
+            get
+            {
+                if (about == null)
+                    about = new Commands.VoidCommand(AboutHandler, true) { };
+                return about;
+            }
+            set
+            {
+                about = value;
+            }
+        }
+        private void AboutHandler()
+        {
+            MessageBox.Show("This utility makes Your life easy if You are Danieli Automation L1.\n\n" +
+                "Easy way to find miising text or combine translated Permissives files for OP panels.\n\n" +
+                "Author - Denis Shishmariov\n" +
+                "Contact - d.shishmarev@danieli.com", "Utility for Danieli Automation L1");
         }
 
         #endregion

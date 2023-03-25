@@ -8,9 +8,9 @@ using System.Windows;
 // набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("LangTextChecker")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Utility to manage Danieli HMI language files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Daniel Inc.")]
+[assembly: AssemblyCompany("Danieli Inc.")]
 [assembly: AssemblyProduct("LangTextChecker")]
 [assembly: AssemblyCopyright("Copyright © Daniel Inc. 2021")]
 [assembly: AssemblyTrademark("")]

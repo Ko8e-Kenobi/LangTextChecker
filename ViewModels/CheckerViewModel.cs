@@ -398,7 +398,7 @@ namespace LangTextChecker.ViewModels
                     string tagName = lineText.Substring(1, lineText.Length - 2);
                     Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\OPfiles");
                     FileStream permissiveOPfs = File.Create($@"{Directory.GetCurrentDirectory()}\OPfiles\{tagName}.intk");
-                    StreamWriter permissivesOPWr = new StreamWriter(permissiveOPfs, Encoding.Unicode);
+                    StreamWriter permissivesOPWr = new StreamWriter(permissiveOPfs, Encoding.Default);
                     Status = $"New permissive file created: {tagName}";
                     fileList = fileList.Insert(0, $"[{tagName}]\r\n");
                     ResultText = fileList;
@@ -412,7 +412,8 @@ namespace LangTextChecker.ViewModels
                             int charId = lineText.IndexOf("=");
                             if (charId >= 0)
                             {
-                                Encoding enc = Encoding.GetEncoding(1251);
+                                
+                                Encoding enc = Encoding.Default;
                                 FileStream languageFs = new FileStream(LanguageFileName, FileMode.Open, FileAccess.Read); //открывает файл только на чтение
                                 StreamReader language = new StreamReader(languageFs, enc); // создаем «потоковый читатель» и связываем его с файловым потоком
                                 string filteredText = lineText.Remove(0, charId + 1).Trim();

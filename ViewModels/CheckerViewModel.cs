@@ -327,27 +327,25 @@ namespace LangTextChecker.ViewModels
         string CompareMessagesOperation(StreamReader operationSr, string languageText)
         {
             string lineText, text = "";
-            int charId, textCounterFun = 0;
+            int charId = -1, textCounterFun = 0;
             while (!operationSr.EndOfStream)
             {
                 lineText = operationSr.ReadLine();
+                if (lineText.Contains(";"))
+                {
+                    continue;
+                }
                 charId = lineText.IndexOf("=");
                 if (charId >= 0)
                 {
                     lineText = lineText.Remove(0, charId + 1).Trim();
-                    //MessageBox.Show(lineText);
-                    charId = lineText.IndexOf(":");
-                    if (charId == 0)
+                    if (!languageText.Contains(lineText))
                     {
-                        lineText = lineText.Trim();
-                        if (!languageText.Contains(lineText))
-                        {
-                            textCounterFun++;
-                            text = text.Insert(0, $"{lineText}\r\n");
-                            ResultText = text;
-                            FoundCounter = textCounterFun.ToString();
-                            Status = $"Found text: {lineText}";
-                        }
+                        textCounterFun++;
+                        text = text.Insert(0, $"{lineText}\r\n");
+                        ResultText = text;
+                        FoundCounter = textCounterFun.ToString();
+                        Status = $"Found text: {lineText}";
                     }
                 }
             }
